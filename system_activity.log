@@ -27,3 +27,4 @@
 20210702;121814;Capteur de mouvement;Le capteur de mouvement a detecte une presence (Unite maitre - Raspberry);1.1078126430511475
 20210702;121827;Capteur sonore;Le capteur sonore a detecte une alerte (Unite esclave - Arduino);4.4345855712890625e-05
 20210702;121831;Capteur sonore;Le capteur sonore a detecte une alerte (Unite esclave - Arduino);9.5367431640625e-06
+20210702;121836;Capteur de mouvement;Le capteur de mouvement a detecte une presence (Unite maitre - Raspberry);3.814697265625e-06
