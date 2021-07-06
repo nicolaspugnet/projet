@@ -1,0 +1,96 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI
+
+# Controls when the action will run. 
+on:
+  # Triggers the workflow on push or pull request events but only for the master branch
+  push:
+    branches: [ master, Pierre2 ]
+  pull_request:
+    branches: [ master ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    name: BUILD
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+
+      # Runs a set of commands using the runners shell
+      - name: BUILD
+        run: |
+          echo La nous faisons le build
+          ls -l $GITHUB_WORKSPACE
+  test_unitaire:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    needs: build
+    name: UNIT TESTS
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+
+      # Runs a set of commands using the runners shell
+      - name: TESTS UNITAIRES...
+        run: |
+          echo La nous faisons les tests unitaires
+          ls -l $GITHUB_WORKSPACE
+  deploy:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    needs: test_unitaire
+    name: DEPLOY
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+
+      # Runs a set of commands using the runners shell
+      - name: DEPLOIEMENT
+        run: |
+          echo La nous faisons le deploiement...
+          ls -l $GITHUB_WORKSPACE
+  test_auto:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    needs: deploy
+    name: TESTS AUTOS (robot framework)
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Initialisation (droits pour output/)
+        run: |
+          chmod -R 777 $GITHUB_WORKSPACE/output/
+          ls -lR $GITHUB_WORKSPACE
+      - name: Robot Framework
+        uses: joonvena/robotframework-docker-action@v0.1
+        env:
+          BROWSER: chrome
+          ROBOT_TESTS_DIR: ${{ github.workspace }}/robot_src
+          ROBOT_REPORTS_DIR: ${{ github.workspace }}/output
+      - name: Before artefact
+        if: ${{ always() }}
+        run: |
+          ls -lR $GITHUB_WORKSPACE
+      - name: Artefacts
+        if: ${{ always() }}
+        uses: actions/upload-artifact@master
+        with:
+          name: resultats_tests_robotframework
+          path: ${{ github.workspace }}/output
