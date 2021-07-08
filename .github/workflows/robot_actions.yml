@@ -1,4 +1,3 @@
-# This is a basic workflow to help you get started with Actions
 
 name: CI
 
@@ -6,7 +5,7 @@ name: CI
 on:
   # Triggers the workflow on push or pull request events but only for the master branch
   push:
-    branches: [ master, Pierre2 ]
+    branches: [ master, charles ]
   pull_request:
     branches: [ master ]
 
@@ -82,7 +81,7 @@ jobs:
         uses: joonvena/robotframework-docker-action@v0.1
         env:
           BROWSER: chrome
-          ROBOT_TESTS_DIR: ${{ github.workspace }}/robot_src
+          ROBOT_TESTS_DIR: ${{ github.workspace }}/src
           ROBOT_REPORTS_DIR: ${{ github.workspace }}/output
       - name: Before artefact
         if: ${{ always() }}
@@ -90,7 +89,7 @@ jobs:
           ls -lR $GITHUB_WORKSPACE
       - name: Artefacts
         if: ${{ always() }}
-        uses: actions/upload-artifact@master
+        uses: actions/upload-artifact@v2
         with:
           name: resultats_tests_robotframework
           path: ${{ github.workspace }}/output
