@@ -645,3 +645,4 @@
 20210708;135756;Capteur de mouvement;Le capteur de mouvement a detecte une presence (Unite maitre - Raspberry);102 s
 20210708;135820;Systeme en attente;Le systeme bascule en mode chenillard;
 20210708;140410;Systeme en attente;Le systeme bascule en mode chenillard;
+20210708;140416;Capteur sonore;Le capteur sonore a detecte une alerte (Unite esclave - Arduino);3.3e-06 s
