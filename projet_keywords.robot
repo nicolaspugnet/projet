@@ -1,0 +1,43 @@
+*** Settings ***
+Library    SSHLibrary
+
+*** Keywords ***
+Connexion
+    [Documentation]    Processus de connexion a la machine par ardresse IP, puis nom utilisateur, et mot de passe
+    [Arguments]    ${ip}    ${login}    ${password}
+    Log    Connexion a : ${ip}
+    Open Connection    ${ip}
+    Login    ${login}    ${password}
+
+Terminer connexion
+    [Documentation]    Processus de deconnexion a la machine
+    Close Connection
+
+Presence du script
+    [Arguments]    ${stdout}    ${test_error}    ${output_file_path}
+    [Documentation]    Processus de verification de la presence du script qui renvoi dans le fichier des sorties un message d'erreur ou pas
+    ...    Puis d'effectuer selon les tests demandes
+    Run Keyword if    "${stdout}" == "${EMPTY}"    Run Keywords
+        ...    AND    ${stdout}=    Le script ne repond pas
+        ...    AND    Ecriture Dans Fichier    ${output_file_path}    ${stdout}
+        ...    AND    Fail    ${stdout}
+    ...    ELSE    Run Keywords
+        ...    Run Keyword if    "${test_error}" == "/dev/ttyS0 connected!"    Verification du test    ${stdout}    ${test_error}    ${output_file_path}
+        ...    AND    Run Keyword if    "${test_error}" == "Parametre inconnu"    Verification du log    ${stdout}    ${test_error}    ${output_file_path}
+        ...    ELSE    Verification du test    ${stdout}    ${test_error}    ${output_file_path}
+
+Verification du test
+    [Arguments]    ${stdout}    ${log_test_msg}    ${output_file_path}
+    [Documentation]    Processus de verification du port qui renvoi dans le fichier des sorties un message d'erreur ou pas
+    Run Keyword if    "${stdout}" == "${log_test_msg}"    Ecriture Dans Fichier    ${output_file_path}    ${stdout}
+    ...    ELSE    Run Keywords
+        ...    Ecriture Dans Fichier    ${output_file_path}    ${stdout}
+        ...    AND    Fail    ${stdout}
+
+Verification du log
+    [Arguments]    ${stdout}    ${log_test_msg}    ${output_file_path}
+    [Documentation]    Processus de verification du log qui renvoi dans le fichier des sorties un message d'erreur ou pas
+    Run Keyword if    '${stdout}' == '${log_test_msg}'    Run Keywords
+    ...    Ecriture Dans Fichier    ${output_file_path}    ${stdout}
+    ...    AND    Fail    ${stdout}
+    ...    ELSE    Ecriture Dans Fichier    ${output_file_path}    ${stdout}

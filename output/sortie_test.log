@@ -1,0 +1,14 @@
+/dev/ttyS0 connected!
+/dev/ttyS0 connected!
+log - 20210708;141934;Capteur sonore;Le capteur sonore a detecte une alerte (Unite esclave - Arduino);70 s
+log - 20210708;141939;Systeme en attente;Le systeme bascule en mode chenillard;
+log - 20210708;141945;Capteur de mouvement;Le capteur de mouvement a detecte une presence (Unite maitre - Raspberry);102 s
+Parametre inconnu
+b'Nano sent me: mouvement'
+b'Nano sent me: test_signal'
+/dev/ttyS0 connected!
+/dev/ttyS0 connected!
+/dev/ttyS0 connected!
+log - 20210708;151019;Capteur sonore;Le capteur sonore a detecte une alerte (Unite esclave - Arduino);70 s
+log - 20210708;151641;Capteur sonore;Le capteur sonore a detecte une alerte (Unite esclave - Arduino);70 s
+log - 20210708;152342;Systeme en attente;Le systeme bascule en mode chenillard;
