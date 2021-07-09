@@ -9,6 +9,22 @@ Connexion
     Open Connection    ${ip}    port=${port}
     Login    ${login}    ${password}
 
+Production
+    [Arguments]    ${git}    ${branch}    ${login}    ${repo}    ${output_file_path}
+    [Documentation]    Processus de deploiement du logiciel du systeme de detection
+    Execute command    cd
+    ${stdout}=    Execute command    ls | grep 'projet'
+    Run Keyword if    "${stdout}" == "${EMPTY}"    Run Keywords
+        ...    Log    Creation du dossier system
+        ...    AND    Ecriture Dans Fichier    ${output_file_path}    Creation du dossier system
+        ...    AND    Execute command    git clone ${git} --quiet
+        ...    AND    Execute command    git checkout ${branch} --quiet
+        ...    AND    Execute command    git pull ${git} ${branch} --quiet
+        ...    AND    Execute command    cp -r ${repo} /home/${login}/
+    ...    ELSE    Run Keywords
+        ...    Log    Le dossier system : existe
+        ...    AND    Ecriture Dans Fichier    ${output_file_path}    Le dossier system : existe
+
 Terminer connexion
     [Documentation]    Processus de deconnexion a la machine
     Close Connection
