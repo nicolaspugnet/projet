@@ -5,7 +5,8 @@ Resource    projet_keywords.robot
 
 *** Variables ***
 # Information du Raspberry PI
-${ip}    10.0.11.202
+${ip}    78.197.7.254
+${port}     22000
 ${login}    pi
 ${password}    ajc
 
@@ -33,7 +34,7 @@ ${signal_msg}    b'Nano sent me: test_signal'
 Test system
     Log     Test system
     [Documentation]    Verification de la connexion du Nano
-    Connexion    ${ip}    ${login}    ${password}
+    Connexion    ${ip}    ${port}   ${login}    ${password}
     ${stdout}=    Execute Command    python3 ${test_system_file}
     Terminer connexion
     Log    ${stdout}
@@ -42,7 +43,7 @@ Test system
 Test log 1
     [Documentation]    Test unitaire : Verification du fonctionnement des logs
     Log    Tests log 1
-    Connexion    ${ip}    ${login}    ${password}
+    Connexion    ${ip}    ${port}   ${login}    ${password}
     ${stdout}=    Execute Command    ${logger_file} 1 70
     Log    ${stdout}
     Terminer connexion
@@ -51,7 +52,7 @@ Test log 1
 Test log 2
     [Documentation]    Test unitaire : Verification du fonctionnement des logs
     Log    Tests log 2
-    Connexion    ${ip}    ${login}    ${password}
+    Connexion    ${ip}    ${port}   ${login}    ${password}
     ${stdout}=    Execute Command    ${logger_file} 2
     Log    ${stdout}
     Terminer connexion
@@ -60,7 +61,7 @@ Test log 2
 Test log 3
     [Documentation]    Test unitaire : Verification du fonctionnement des logs
     Log    Tests log 3
-    Connexion    ${ip}    ${login}    ${password}
+    Connexion    ${ip}    ${port}   ${login}    ${password}
     ${stdout}=    Execute Command    ${logger_file} 3 102
     Log    ${stdout}
     Terminer connexion
@@ -69,7 +70,7 @@ Test log 3
 Test log 4
     [Documentation]     Cas de test avec une erreur voulue
     Log    Test log erreur
-    Connexion    ${ip}    ${login}    ${password}
+    Connexion    ${ip}    ${port}   ${login}    ${password}
     ${stdout}=    Execute Command    ${logger_file} 4 50
     Log    ${stdout}
     Terminer connexion
@@ -78,7 +79,7 @@ Test log 4
 Test mouvement
     [Documentation]     Test unitaire : Verification du fonctionnement de la partie capteur presence
     Log     Test mouvement
-    Connexion    ${ip}    ${login}    ${password}
+    Connexion    ${ip}    ${port}   ${login}    ${password}
     ${stdout}=    Execute Command    python3 ${test_mouvement_file}
     Terminer connexion
     Presence du script    ${stdout}    ${mouvement_msg}    ${output_file_path}
@@ -86,7 +87,7 @@ Test mouvement
 Test signal
     [Documentation]     Test unitaire : Verification du fonctionnement de la partie capteur signal
     Log     Test signal
-    Connexion    ${ip}    ${login}    ${password}
+    Connexion    ${ip}    ${port}   ${login}    ${password}
     ${stdout}=    Execute Command    python3 ${test_signal_file}
     Terminer connexion
     Presence du script    ${stdout}    ${signal_msg}    ${output_file_path}
@@ -94,7 +95,7 @@ Test signal
 Full Test system
     [Documentation]     Test unitaire : Verification du fonctionnement du systeme complet
     Log     Test system
-    Connexion    ${ip}    ${login}    ${password}
+    Connexion    ${ip}    ${port}   ${login}    ${password}
     ${stdout}=    Execute Command    python3 ${test_full_system_file}
     Terminer connexion
     Ecriture Dans Fichier    ${output_file_path}    Ceci est le Test Full system
