@@ -5,8 +5,8 @@ Resource    projet_keywords.robot
 
 *** Variables ***
 # Information du Raspberry PI
-${ip}    78.197.7.254
-${port}     22000
+${ip}    78.197.7.24
+${port}     22
 ${login}    pi
 ${password}    ajc
 
