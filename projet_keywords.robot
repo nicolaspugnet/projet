@@ -4,9 +4,9 @@ Library    SSHLibrary
 *** Keywords ***
 Connexion
     [Documentation]    Processus de connexion a la machine par ardresse IP, puis nom utilisateur, et mot de passe
-    [Arguments]    ${ip}    ${login}    ${password}
+    [Arguments]    ${ip}    ${port}     ${login}    ${password}
     Log    Connexion a : ${ip}
-    Open Connection    ${ip}
+    Open Connection    ${ip}    port=${port}
     Login    ${login}    ${password}
 
 Terminer connexion
