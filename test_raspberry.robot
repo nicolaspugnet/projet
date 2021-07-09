@@ -10,8 +10,14 @@ ${port}     22
 ${login}    pi
 ${password}    ajc
 
+# Information du git
+${git_repo}    projet
+${git}    git@github.com:nicolaspugnet/${git_repo}.git
+${branch}    master
+${repo}    Projet
+
 # Architecture du systeme
-${projet_path}    /home/pi/Projet/
+${projet_path}    /home/${login}/${repo}/
 ${logger_file}    ${projet_path}logger
 ${test_path}    ${projet_path}test/
 
@@ -31,6 +37,12 @@ ${mouvement_msg}    b'Nano sent me: mouvement'
 ${signal_msg}    b'Nano sent me: test_signal'
 
 *** Test Cases ***
+Deploiement system
+    [Documentation]    Deploiement du logiciel sur le Raspberry
+    Connexion    ${ip}    ${port}    ${login}    ${password}
+    Production    ${git}    ${branch}    ${login}    ${repo}    ${output_file_path}
+    Terminer connexion
+
 Test system
     Log     Test system
     [Documentation]    Verification de la connexion du Nano
