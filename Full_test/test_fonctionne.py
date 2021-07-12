@@ -10,7 +10,7 @@ GPIO.setmode(GPIO.BOARD)
 GPIO.setup(38, GPIO.IN)
 
 # Initialisation des logs
-path="~/Projet/logger "
+path="~/projet/logger "
 log=path
 
 #Initialisation du temps de fonctionnement en seconde
