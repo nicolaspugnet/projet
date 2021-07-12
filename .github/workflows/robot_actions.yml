@@ -96,7 +96,7 @@ jobs:
           ls -lR $GITHUB_WORKSPACE
       - name: Artefacts
         if: ${{ always() }}
-        uses: actions/upload-artifact@main
+        uses: actions/upload-artifact@v2
         with:
           name: resultats_tests_robotframework
           path: ${{ github.workspace }}/output
