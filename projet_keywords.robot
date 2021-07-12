@@ -10,7 +10,7 @@ Connexion
     Login    ${login}    ${password}
 
 Production
-    [Arguments]    ${git}    ${branch}    ${login}    ${git_repo}   ${repo}    ${output_file_path}
+    [Arguments]    ${git}    ${branch}    ${login}    ${repo}    ${output_file_path}
     [Documentation]    Processus de deploiement du logiciel du systeme de detection
     Execute command    cd
     ${stdout}=    Execute command    ls | grep '${repo}'
@@ -21,11 +21,9 @@ Production
         ...    Log    Creation du dossier system
         ...    AND    Ecriture Dans Fichier    ${output_file_path}    Creation du dossier system
         ...    AND    Execute command    git clone ${git} --quiet
-        ...    AND    Execute command    cd /home/${login}/${git_repo}/
-        ...    AND    Execute command    git checkout ${branch} --quiet
+        ...    AND    Execute command    cd /home/${login}/${repo}/
         ...    AND    Execute command    git pull ${git} ${branch} --quiet
-        ...    AND    Execute command    cp -R ${repo}/ /home/${login}/
-        ...    AND    Execute command    ls -l
+        ...    AND    Execute command    git checkout ${branch} --quiet
         ...    AND    Execute command    sudo chmod 774 ${logger_file}
 
 Terminer connexion
