@@ -13,7 +13,7 @@ Production
     [Arguments]    ${git}    ${branch}    ${login}    ${repo}    ${output_file_path}
     [Documentation]    Processus de deploiement du logiciel du systeme de detection
     Execute command    cd
-    ${stdout}=    Execute command    ls | grep 'projet'
+    ${stdout}=    Execute command    ls | grep 'Projet'
     Run Keyword if    "${stdout}" == "${EMPTY}"    Run Keywords
         ...    Log    Creation du dossier system
         ...    AND    Ecriture Dans Fichier    ${output_file_path}    Creation du dossier system
