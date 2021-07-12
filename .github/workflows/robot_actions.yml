@@ -76,7 +76,7 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@master
       - name: Initialisation (droits pour output/)
         run: |
           chmod -R 777 $GITHUB_WORKSPACE/output/
@@ -93,7 +93,7 @@ jobs:
           ls -lR $GITHUB_WORKSPACE
       - name: Artefacts
         if: ${{ always() }}
-        uses: actions/upload-artifact@master
+        uses: actions/upload-artifact@main
         with:
           name: resultats_tests_robotframework
           path: ${{ github.workspace }}/output
