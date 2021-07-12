@@ -18,7 +18,7 @@ Production
         ...    Log    Creation du dossier system
         ...    AND    Ecriture Dans Fichier    ${output_file_path}    Creation du dossier system
         ...    AND    Execute command    git clone ${git} --quiet
-        ...    AND    Execute command    cd ${git_repo}
+        ...    AND    Execute command    cd /home/${login}/${git_repo}/
         ...    AND    Execute command    git checkout ${branch} --quiet
         ...    AND    Execute command    git pull ${git} ${branch} --quiet
         ...    AND    Execute command    cp -R ${repo} /home/${login}/
