@@ -14,7 +14,10 @@ Production
     [Documentation]    Processus de deploiement du logiciel du systeme de detection
     Execute command    cd
     ${stdout}=    Execute command    ls | grep '${repo}'
-    Run Keyword if    "${stdout}" == "${EMPTY}"    Run Keywords
+    Run Keyword if    '${stdout}' == '${repo}'    Run Keywords
+        ...    Log    Le dossier system : existe
+        ...    AND    Ecriture Dans Fichier    ${output_file_path}    Le dossier system : existe
+    ...    ELSE    Run Keywords
         ...    Log    Creation du dossier system
         ...    AND    Ecriture Dans Fichier    ${output_file_path}    Creation du dossier system
         ...    AND    Execute command    git clone ${git} --quiet
@@ -22,9 +25,6 @@ Production
         ...    AND    Execute command    git checkout ${branch} --quiet
         ...    AND    Execute command    git pull ${git} ${branch} --quiet
         ...    AND    Execute command    cp -R ${repo} /home/${login}/
-    ...    ELSE    Run Keywords
-        ...    Log    Le dossier system : existe
-        ...    AND    Ecriture Dans Fichier    ${output_file_path}    Le dossier system : existe
 
 Terminer connexion
     [Documentation]    Processus de deconnexion a la machine
