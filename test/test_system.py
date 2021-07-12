@@ -6,7 +6,7 @@ import os
 import sys
 
 #Declaration du chemin du fichier a importer
-sys.path.insert(1,'/home/pi/Projet/Full_test/')
+sys.path.insert(1,'/home/pi/projet/Full_test/')
 
 #Declaration du port TXRX
 arduino = serial.Serial(port='/dev/ttyS0', baudrate=9600, timeout=.1)
