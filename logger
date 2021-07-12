@@ -1,0 +1,67 @@
+#!/bin/bash
+# Debut du programme de log
+#echo "#--------------------------#"
+#echo "#          LOGGER          #"
+#echo "#--------------------------#"
+
+# Fichier de logs
+log_dir=~/projet
+log_file=$log_dir/system_activity.log
+branch=master
+
+# Repository GIT
+git_repository=git@github.com:nicolaspugnet/projet.git
+#git_repository=https://github.com/nicolaspugnet/projet.git
+
+# Initialisation - on verifie si le repertoire $log_dir/.git existe et on le clone le repository
+cd
+if [ ! -d $log_dir"/.git" ];then
+#	echo Clonage du repository"
+	# On clone le repository
+	git clone $git_repository --quiet
+	cd $log_dir
+	git checkout $branch --quiet
+else
+	# Mise à jour du repository avec la dernière version du fichier
+#	echo "Recuperation de la derniere version"
+	cd $log_dir
+	git checkout $branch --quiet
+	git pull $git_repository $branch --quiet
+fi
+
+# Construction de la ligne de log. Initialisation avec la date et l'heure
+log_line=$(date "+%Y%m%d")";"$(date "+%H%M%S")";"
+
+case $1 in
+# 1 : Le capteur de son detecte un signal
+"1")
+#	echo "Cas n°1"
+	log_line=$log_line"Capteur sonore;Le capteur sonore a detecte une alerte (Unite esclave - Arduino);"
+;;
+# 2 : Le système se met en attente
+"2")
+#	echo "Cas n°2"
+	log_line=$log_line"Systeme en attente;Le systeme bascule en mode chenillard;"
+;;
+# 3 : Detection d'une presence
+"3")
+#	echo "Cas n°3"
+	log_line=$log_line"Capteur de mouvement;Le capteur de mouvement a detecte une presence (Unite maitre - Raspberry);"
+;;
+# Mauvais parametre
+*)
+	echo "Parametre inconnu"
+	exit
+esac
+
+if [ $1 -ne "2" ];then
+	log_line=$log_line$2" s"
+fi
+
+# On ajoute la ligne de log courante au fichier
+echo $log_line >> $log_file
+echo "log - "$log_line
+git add $log_file 
+git commit -m "Ajout d'une ligne de log" $log_file --quiet
+git push $git_repository $branch --quiet
+exit
