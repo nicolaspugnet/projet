@@ -24,7 +24,8 @@ Production
         ...    AND    Execute command    cd /home/${login}/${git_repo}/
         ...    AND    Execute command    git checkout ${branch} --quiet
         ...    AND    Execute command    git pull ${git} ${branch} --quiet
-        ...    AND    Execute command    cp -R ${repo} /home/${login}/
+        ...    AND    Execute command    cp -R ${repo}/ /home/${login}/
+        ...    AND    Execute command    sudo chmod 774 ${logger_file}
 
 Terminer connexion
     [Documentation]    Processus de deconnexion a la machine
