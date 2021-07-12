@@ -35,8 +35,8 @@ Presence du script
     [Documentation]    Processus de verification de la presence du script qui renvoi dans le fichier des sorties un message d'erreur ou pas
     ...    Puis d'effectuer selon les tests demandes
     Run Keyword if    "${stdout}" == "${EMPTY}"    Run Keywords
-        ...    AND    ${stdout}=    Le script ne repond pas
-        ...    AND    Ecriture Dans Fichier    ${output_file_path}    ${stdout}
+        ...    Log    Le script ne repond pas
+        ...    AND    Ecriture Dans Fichier    ${output_file_path}    Le script ne repond pas
         ...    AND    Fail    ${stdout}
     ...    ELSE    Run Keywords
         ...    Run Keyword if    "${test_error}" == "/dev/ttyS0 connected!"    Verification du test    ${stdout}    ${test_error}    ${output_file_path}
