@@ -40,7 +40,7 @@ ${signal_msg}    b'Nano sent me: test_signal'
 Deploiement system
     [Documentation]    Deploiement du logiciel sur le Raspberry
     Connexion    ${ip}    ${port}    ${login}    ${password}
-    Production    ${git}    ${branch}    ${login}    ${repo}    ${output_file_path}
+    Production    ${git}    ${branch}    ${login}    ${git_repo}    ${repo}    ${output_file_path}
     Terminer connexion
 
 Test system
