@@ -7,7 +7,7 @@ Resource    projet_keywords.robot
 # Information du Raspberry PI
 ${ip}    78.202.120.193
 ${port}     22
-${login}    root
+${login}    pi
 ${password}    ajc
 
 # Information du git
