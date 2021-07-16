@@ -16,7 +16,7 @@ log=path
 #Initialisation du temps de fonctionnement en seconde
 timestbystart=0
 timestby=0
-dureestby=60
+dureestby=20
 
 #Initialisation port Nano
 arduino = serial.Serial(port='/dev/ttyS0', baudrate=9600, timeout=.1)
